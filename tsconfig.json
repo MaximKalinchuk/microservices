@@ -16,6 +16,12 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@amqp/amqp-contracts": ["libs/amqp-contracts/src"],
+      "@amqp/amqp-contracts/*": ["libs/amqp-contracts/src/*"],
+      "@constants/constants": ["libs/constants/src"],
+      "@constants/constants/*": ["libs/constants/src/*"]
+    }
   }
 }
