@@ -29,6 +29,18 @@
       ],
       "@constants/constants/*": [
         "libs/constants/src/*"
+      ],
+      "@class/classes": [
+        "libs/classes/src"
+      ],
+      "@class/classes/*": [
+        "libs/classes/src/*"
+      ],
+      "@providers/providers": [
+        "libs/providers/src"
+      ],
+      "@providers/providers/*": [
+        "libs/providers/src/*"
       ]
     }
   }

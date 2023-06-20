@@ -20,6 +20,7 @@
     "test:e2e": "jest --config ./apps/microservices/test/jest-e2e.json"
   },
   "dependencies": {
+    "@golevelup/nestjs-rabbitmq": "^3.6.1",
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
@@ -29,6 +30,7 @@
   "devDependencies": {
     "@nestjs/cli": "^9.0.0",
     "@nestjs/config": "^3.0.0",
+    "@nestjs/cqrs": "^10.0.0",
     "@nestjs/schematics": "^9.0.0",
     "@nestjs/testing": "^9.0.0",
     "@nestjs/typeorm": "^10.0.0",
@@ -38,6 +40,8 @@
     "@types/supertest": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.0",
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
@@ -75,7 +79,9 @@
     ],
     "moduleNameMapper": {
       "^@amqp/amqp-contracts(|/.*)$": "<rootDir>/libs/amqp-contracts/src/$1",
-      "^@constants/constants(|/.*)$": "<rootDir>/libs/constants/src/$1"
+      "^@constants/constants(|/.*)$": "<rootDir>/libs/constants/src/$1",
+      "^@class/classes(|/.*)$": "<rootDir>/libs/classes/src/$1",
+      "^@providers/providers(|/.*)$": "<rootDir>/libs/providers/src/$1"
     }
   }
 }
