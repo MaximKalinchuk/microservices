@@ -18,10 +18,18 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@amqp/amqp-contracts": ["libs/amqp-contracts/src"],
-      "@amqp/amqp-contracts/*": ["libs/amqp-contracts/src/*"],
-      "@constants/constants": ["libs/constants/src"],
-      "@constants/constants/*": ["libs/constants/src/*"]
+      "@amqp/amqp-contracts": [
+        "libs/amqp-contracts/src"
+      ],
+      "@amqp/amqp-contracts/*": [
+        "libs/amqp-contracts/src/*"
+      ],
+      "@constants/constants": [
+        "libs/constants/src"
+      ],
+      "@constants/constants/*": [
+        "libs/constants/src/*"
+      ]
     }
   }
 }

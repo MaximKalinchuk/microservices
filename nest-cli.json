@@ -54,6 +54,15 @@
       "compilerOptions": {
         "tsConfigPath": "libs/constants/tsconfig.lib.json"
       }
+    },
+    "read-service": {
+      "type": "application",
+      "root": "apps/read-service",
+      "entryFile": "main",
+      "sourceRoot": "apps/read-service/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/read-service/tsconfig.app.json"
+      }
     }
   }
 }
