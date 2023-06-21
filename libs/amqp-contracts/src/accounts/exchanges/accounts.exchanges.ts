@@ -2,5 +2,5 @@ import { RabbitExchangeConfig } from '@amqp/amqp-contracts/shared/rabbit-exchang
 
 export const EXCHANGE_ACCOUNT: RabbitExchangeConfig = {
 	name: 'accounts',
-	type: 'direct',
+	type: 'topic',
 };

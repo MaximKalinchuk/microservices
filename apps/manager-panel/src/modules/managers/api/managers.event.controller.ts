@@ -3,18 +3,20 @@ import { CreateManagerInputModel } from './models/input/create.manager.input-mod
 import { CommandBus } from '@nestjs/cqrs';
 import { CreateManagerCommand } from '../application/useCases/create.manager.use-case';
 import { RabbitSubscribe } from '@golevelup/nestjs-rabbitmq';
-import { CreateManagerContract } from '@amqp/amqp-contracts/accounts/queues/accounts/create.manager.contract';
+import { CreateManagerManagerPanelContract } from '@amqp/amqp-contracts/accounts/queues/accounts/create.manager.manager-panel.contract';
 
 @Controller('users')
 export class ManagersEventController {
 	constructor(private readonly commandBus: CommandBus) {}
 
 	@RabbitSubscribe({
-		exchange: CreateManagerContract.queue.exchange.name,
-		routingKey: CreateManagerContract.queue.routingKey,
-		queue: CreateManagerContract.queue.queue,
+		exchange: CreateManagerManagerPanelContract.queue.exchange.name,
+		routingKey: CreateManagerManagerPanelContract.queue.routingKey,
+		queue: CreateManagerManagerPanelContract.queue.queue,
 	})
-	async createManager(request: CreateManagerContract.request) {
-		console.log(request);
+	async createManager(request: CreateManagerManagerPanelContract.request) {
+		const managerData = request.payload;
+		console.log(managerData);
+		await this.commandBus.execute(new CreateManagerCommand(managerData));
 	}
 }

@@ -4,7 +4,7 @@ import { ConfigService } from '@nestjs/config';
 const AMQP_EXCHANGES: RabbitMQExchangeConfig[] = [
 	{
 		name: 'accounts',
-		type: 'direct',
+		type: 'topic',
 	},
 ];
 
