@@ -22,6 +22,6 @@ export class CreateManagerUseCase implements ICommandHandler<CreateManagerComman
 	async execute(command: CreateManagerCommand): Promise<any> {
 		const newManager = ManagersEntity.create(command);
 		await this.managersRepository.save(newManager);
-		await this.eventBus.publish(new CreateManagerEvent(command));
+		await this.eventBus.publish(new CreateManagerEvent(command, newManager.id));
 	}
 }

@@ -1,7 +1,8 @@
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
+import { CommandHandler, ICommandHandler, EventBus } from '@nestjs/cqrs';
 import { CreateGroupInputModel } from '../../api/models/input/create.group.input-model';
 import { GroupRepository } from '../../infrastructure/group.repository';
 import { GroupEntity } from '../../domain/entity/group.entity';
+import { CreateGroupEvent } from '../../domain/event/create.group.event';
 
 export class CreateGroupCommand {
 	groupName: string;
@@ -12,11 +13,10 @@ export class CreateGroupCommand {
 
 @CommandHandler(CreateGroupCommand)
 export class CreateGroupUseCase implements ICommandHandler<CreateGroupCommand> {
-	constructor(private readonly groupRepository: GroupRepository) {}
+	constructor(private readonly groupRepository: GroupRepository, private readonly eventBus: EventBus) {}
 	async execute(command: CreateGroupCommand): Promise<void> {
-		console.log(command);
 		const newGroup = GroupEntity.create(command);
-		console.log(newGroup);
 		await this.groupRepository.save(newGroup);
+		await this.eventBus.publish(new CreateGroupEvent(command));
 	}
 }

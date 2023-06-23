@@ -6,9 +6,11 @@ import { GroupQueryRepository, GroupRepository } from './infrastructure';
 import { CreateGroupUseCase } from './application/useCases/create.group.use-case';
 import { GroupController } from './api/group.controller';
 import { CqrsModule } from '@nestjs/cqrs';
+import { ProvidersModule } from '@providers/providers/providers.module';
+import { CreateGroupEventUseCase } from './domain/event/create.group.event';
 
 const adapters = [GroupQueryRepository, GroupRepository];
-const useCases = [CreateGroupUseCase];
+const useCases = [CreateGroupUseCase, CreateGroupEventUseCase];
 
 @Module({
 	imports: [CqrsModule, TypeOrmModule.forFeature([GroupEntity])],

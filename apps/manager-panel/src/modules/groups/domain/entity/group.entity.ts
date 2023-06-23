@@ -1,7 +1,7 @@
-import { BaseEntity } from '@class/classes/base.entity.abstract.class';
 import { Entity, Column } from 'typeorm';
 import { CreateGroupInputModel } from '../../api/models/input/create.group.input-model';
 import { randomUUID } from 'crypto';
+import { BaseEntity } from '@class/classes/entities';
 
 @Entity('groups')
 export class GroupEntity extends BaseEntity {

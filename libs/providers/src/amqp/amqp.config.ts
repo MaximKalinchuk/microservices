@@ -6,6 +6,10 @@ const AMQP_EXCHANGES: RabbitMQExchangeConfig[] = [
 		name: 'accounts',
 		type: 'topic',
 	},
+	{
+		name: 'manager-panel',
+		type: 'topic',
+	},
 ];
 
 export const amqpConfig = (configService: ConfigService): RabbitMQConfig => {

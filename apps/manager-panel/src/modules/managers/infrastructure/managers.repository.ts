@@ -1,4 +1,4 @@
-import { BaseRepository } from '@class/classes/base.repository.abstract.class';
+import { BaseRepository } from '@class/classes/entities';
 import { ManagersEntity } from '../domain/entity/managers.entity';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
