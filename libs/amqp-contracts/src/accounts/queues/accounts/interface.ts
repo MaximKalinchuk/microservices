@@ -9,7 +9,7 @@ export class CreateManagerRequest {
 	readonly email: string;
 	@IsString()
 	@IsNotEmpty()
-	readonly password: string;
+	readonly passwordHash: string;
 	@IsString()
 	@IsNotEmpty()
 	readonly fullName: string;

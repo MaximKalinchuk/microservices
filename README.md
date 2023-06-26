@@ -6,6 +6,14 @@
 
 Microservices - backend, использующий микросервисную архитектуру, написанный с помощью NestJS ( Monorepo ).<br>
 
+## Микросервисы:
+
+- Accounts (Управление пользователями) - PostgreSQL
+- Manager-Panel (Управление группами) - PostgreSQL
+- Read-Service (Получение данных с помощью GET запросов) - MongoDB
+
+<img src="https://i.ibb.co/XS9Cx52/1.png">
+
 ## Стэк
 
-NestJS, postrgeSQL, TypeScript
+NestJS, postrgeSQL, TypeScript, MongoDB

@@ -5,10 +5,12 @@ import { ProvidersModule } from '@providers/providers/providers.module';
 import { CreateManagerUseCase } from './application/useCases/create.manager.use-case';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Manager, ManagerSchema } from './domain/schema/managers.schema';
-import { ManagerRepository } from './infrastructure/repositories/managers.repository';
+import { ManagersRepository } from './infrastructure/repositories/managers.repository';
+import { ManagersQueryRepository } from './infrastructure/repositories/managers.query.repository';
+import { ManagersController } from './api/managers.controller';
 
 const useCase = [CreateManagerUseCase];
-const adapters = [ManagerRepository];
+const adapters = [ManagersRepository, ManagersQueryRepository];
 
 @Module({
 	imports: [
@@ -21,7 +23,7 @@ const adapters = [ManagerRepository];
 			},
 		]),
 	],
-	controllers: [],
+	controllers: [ManagersController],
 	providers: [...adapters, ...useCase, ManagersEventController],
 	exports: [],
 })

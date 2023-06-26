@@ -1,6 +1,4 @@
-import { IsNotEmpty, IsString } from 'class-validator';
-
-export class CreateManagerInputModel {
+export class CreateManagerEventInputModel {
 	readonly id: string;
 	readonly email: string;
 	readonly passwordHash: string;

@@ -2,18 +2,19 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Manager } from '../../domain/schema/managers.schema';
 import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
-import { ManagerEntity } from '../../domain/entities/managers.entity';
+import { CreateManagerInputModel } from '../../api/models/input/create.manager.input-model';
+// import { ManagerEntity } from '../../domain/entities/managers.entity';
 
 @Injectable()
-export class ManagerRepository {
-	constructor(@InjectModel(Manager.name) private readonly managerRepository: Model<Manager>) {}
+export class ManagersRepository {
+	constructor(@InjectModel(Manager.name) private readonly managersRepository: Model<Manager>) {}
 
-	async createManager(manager: ManagerEntity) {
-		const newManager = new this.managerRepository(manager);
+	async createManager(manager: CreateManagerInputModel) {
+		const newManager = new this.managersRepository(manager);
 		return newManager.save();
 	}
 
 	async findManager(id: string) {
-		return this.managerRepository.findOne({ id }).exec();
+		return this.managersRepository.findOne({ id }).exec();
 	}
 }
