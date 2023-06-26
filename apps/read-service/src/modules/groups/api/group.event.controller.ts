@@ -1,5 +1,4 @@
 import { Controller, Body, Post } from '@nestjs/common';
-import { CreateGroupInputModel } from './models/input/create.group.input-model';
 import { CommandBus } from '@nestjs/cqrs';
 import { CreateGroupCommand } from '../application/useCases/create.group.use-case';
 import { RabbitSubscribe } from '@golevelup/nestjs-rabbitmq';

@@ -3,7 +3,7 @@ import { ManagersModule } from './managers/managers.module';
 import { ConfigModule } from '@nestjs/config';
 import { GroupsModule } from './groups/groups.module';
 import { MongooseModule } from '@nestjs/mongoose';
-import { getMongoConfig } from '../config/mongo.config';
+import { MongoConnetion } from '../config/mongo.config';
 
 @Module({
 	imports: [
@@ -11,7 +11,7 @@ import { getMongoConfig } from '../config/mongo.config';
 			isGlobal: true,
 			envFilePath: `envs/.read-service.env`,
 		}),
-		MongooseModule.forRootAsync(getMongoConfig()),
+		MongooseModule.forRootAsync(MongoConnetion.connect()),
 		ManagersModule,
 		GroupsModule,
 	],
