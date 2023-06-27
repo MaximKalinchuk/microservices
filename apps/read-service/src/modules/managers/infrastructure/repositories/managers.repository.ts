@@ -3,7 +3,6 @@ import { Manager } from '../../domain/schema/managers.schema';
 import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { CreateManagerInputModel } from '../../api/models/input/create.manager.input-model';
-// import { ManagerEntity } from '../../domain/entities/managers.entity';
 
 @Injectable()
 export class ManagersRepository {

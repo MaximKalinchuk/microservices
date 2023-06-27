@@ -19,9 +19,9 @@ export class ManagersEntity extends BaseEntity {
 	}
 	static create(dto: CreateManagerInputModel) {
 		const newManager = new ManagersEntity();
-		newManager.id = randomUUID();
+		newManager.id = dto.id;
 		newManager.email = dto.email;
-		newManager.passwordHash = dto.password;
+		newManager.passwordHash = dto.passwordHash;
 		newManager.fullName = dto.fullName;
 		return newManager;
 	}

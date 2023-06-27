@@ -4,12 +4,14 @@ import { ManagersRepository } from '../../infrastructure/managers.repository';
 import { ManagersEntity } from '../../domain/entity/managers.entity';
 
 export class CreateManagerCommand {
+	id: string;
 	email: string;
-	password: string;
+	passwordHash: string;
 	fullName: string;
 	constructor(dto: CreateManagerInputModel) {
+		this.id = dto.id;
 		this.email = dto.email;
-		this.password = dto.password;
+		this.passwordHash = dto.passwordHash;
 		this.fullName = dto.fullName;
 	}
 }

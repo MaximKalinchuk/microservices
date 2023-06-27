@@ -1,7 +1,7 @@
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModuleAsyncOptions } from '@nestjs/mongoose';
+
 export class MongoConnetion {
-	// constructor(private readonly configService: ConfigService) {}
 	static connect(): MongooseModuleAsyncOptions {
 		const getMongoString = (configService: ConfigService) =>
 			`mongodb://${configService.get('MONGO_LOGIN')}:${configService.get('MONGO_PASSWORD')}@${configService.get(
