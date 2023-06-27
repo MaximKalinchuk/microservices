@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://avatars.yandex.net/get-music-user-playlist/34120/606666247.1004.78267/m1000x1000?1607849310019&webp=false" width="400" alt="Nest Logo" /></a>
+  <a href="http://nestjs.com/" target="blank"><img src="https://i.ibb.co/YWFBGzC/m1000x1000.png" width="400" alt="Nest Logo" /></a>
 </p>
 
 ## Описание
