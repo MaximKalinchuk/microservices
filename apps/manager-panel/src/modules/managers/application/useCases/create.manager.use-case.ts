@@ -20,7 +20,7 @@ export class CreateManagerCommand {
 export class CreateManagerUseCase implements ICommandHandler<CreateManagerCommand> {
 	constructor(private readonly managersRepository: ManagersRepository) {}
 
-	async execute(command: CreateManagerCommand): Promise<any> {
+	async execute(command: CreateManagerCommand): Promise<void> {
 		const newManager = ManagersEntity.create(command);
 		await this.managersRepository.save(newManager);
 	}

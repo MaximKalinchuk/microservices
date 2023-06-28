@@ -8,12 +8,12 @@ import { CreateManagerInputModel } from '../../api/models/input/create.manager.i
 export class ManagersRepository {
 	constructor(@InjectModel(Manager.name) private readonly managersRepository: Model<Manager>) {}
 
-	async createManager(manager: CreateManagerInputModel) {
+	async createManager(manager: CreateManagerInputModel): Promise<void> {
 		const newManager = new this.managersRepository(manager);
-		return newManager.save();
+		newManager.save();
 	}
 
-	async findManager(id: string) {
-		return this.managersRepository.findOne({ id }).exec();
+	async updateManagerFullname(id, fullName): Promise<void> {
+		await this.managersRepository.updateOne({ id }, { $set: { fullName } });
 	}
 }

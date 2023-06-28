@@ -1,6 +1,4 @@
-import { IsNotEmpty, IsString } from 'class-validator';
-
-export class CreateGroupInputModel {
+export class CreateGroupEventInputModel {
 	readonly id: string;
 	readonly groupName: string;
 	readonly managerFullName: string;

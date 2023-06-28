@@ -1,8 +1,8 @@
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 import { CreateManagerInputModel } from '../../../api/models/input/create.manager.input-model';
 import { AmqpConnection } from '@golevelup/nestjs-rabbitmq';
-import { CreateManagerManagerPanelContract } from '@amqp/amqp-contracts/accounts/queues/accounts/create.manager.manager-panel.contract';
 import { CreateManagerEventInputModel } from './models/input/create.manager.event.input-model';
+import { CreateManagerManagerPanelContract } from '@amqp/amqp-contracts/accounts/queues/create.manager.contracts';
 
 export class CreateManagerEvent {
 	id: string;

@@ -26,4 +26,8 @@ export class ManagersEntity extends BaseEntity {
 		newManager.fullName = dto.fullName;
 		return newManager;
 	}
+
+	updateFullname(fullName: string): void {
+		this.fullName = fullName;
+	}
 }

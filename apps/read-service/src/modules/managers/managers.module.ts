@@ -8,8 +8,9 @@ import { Manager, ManagerSchema } from './domain/schema/managers.schema';
 import { ManagersRepository } from './infrastructure/repositories/managers.repository';
 import { ManagersQueryRepository } from './infrastructure/repositories/managers.query.repository';
 import { ManagersController } from './api/managers.controller';
+import { UpdateManagerFullnameUseCase } from './application/useCases/update.manager.fullname.use-case';
 
-const useCase = [CreateManagerUseCase];
+const useCase = [CreateManagerUseCase, UpdateManagerFullnameUseCase];
 const adapters = [ManagersRepository, ManagersQueryRepository];
 
 @Module({

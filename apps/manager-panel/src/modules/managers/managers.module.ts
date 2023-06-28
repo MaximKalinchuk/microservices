@@ -6,14 +6,15 @@ import { ManagersQueryRepository, ManagersRepository } from './infrastructure';
 import { CreateManagerUseCase } from './application/useCases/create.manager.use-case';
 import { CqrsModule } from '@nestjs/cqrs';
 import { ProvidersModule } from '@providers/providers/providers.module';
+import { UpdateManagerFullnameUseCase } from './application/useCases/update.manager.fullname.use-case';
 
-const useCase = [CreateManagerUseCase];
+const useCase = [CreateManagerUseCase, UpdateManagerFullnameUseCase];
 const adapters = [ManagersQueryRepository, ManagersRepository];
 
 @Module({
 	imports: [CqrsModule, TypeOrmModule.forFeature([ManagersEntity]), ProvidersModule],
 	controllers: [],
 	providers: [...adapters, ...useCase, ManagersEventController],
-	exports: [],
+	exports: [...adapters],
 })
 export class ManagersModule {}

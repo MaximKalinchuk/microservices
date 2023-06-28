@@ -1,12 +1,18 @@
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
-import { CreateGroupInputModel } from '../../api/models/input/create.group.input-model';
 import { AmqpConnection } from '@golevelup/nestjs-rabbitmq';
-import { CreateGroupReadServiceContract } from '@amqp/amqp-contracts/accounts/queues/manager-panel/create.group.read-service.contract';
+import { CreateGroupReadServiceContract } from '@amqp/amqp-contracts/manager-panel/queues/create.group.read-service.contract';
+import { CreateGroupEventInputModel } from './models/create.group.event.input-model';
 
 export class CreateGroupEvent {
+	id: string;
 	groupName: string;
-	constructor(dto: CreateGroupInputModel) {
+	managerFullName: string;
+	creatorId: string;
+	constructor(dto: CreateGroupEventInputModel) {
+		this.id = dto.id;
 		this.groupName = dto.groupName;
+		this.managerFullName = dto.managerFullName;
+		this.creatorId = dto.creatorId;
 	}
 }
 
@@ -18,7 +24,12 @@ export class CreateGroupEventUseCase implements IEventHandler<CreateGroupEvent> 
 			CreateGroupReadServiceContract.queue.exchange.name,
 			CreateGroupReadServiceContract.queue.routingKey,
 			{
-				payload: { groupName: event.groupName },
+				payload: {
+					id: event.id,
+					groupName: event.groupName,
+					managerFullName: event.managerFullName,
+					creatorId: event.creatorId,
+				},
 			},
 		);
 	}

@@ -3,7 +3,7 @@ import { Manager } from '../../domain/schema/managers.schema';
 import { Model } from 'mongoose';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { GetManagerViewModel } from '../../api/models/view/get.manager.view-model';
-import { READ_SERVICE_MANAGER_EXEPTIONS } from '@constants/constants/read-service-exception/manager.exeprions';
+import { READ_SERVICE_MANAGER_EXEPTIONS } from '@constants/constants/read-service-exception/manager.exeptions';
 
 @Injectable()
 export class ManagersQueryRepository {

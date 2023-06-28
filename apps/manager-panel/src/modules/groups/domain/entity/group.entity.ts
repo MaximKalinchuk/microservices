@@ -11,11 +11,15 @@ export class GroupEntity extends BaseEntity {
 	@Column()
 	managerFullName: string;
 
-	static create(dto: CreateGroupInputModel) {
+	@Column()
+	creatorId: string;
+
+	static create(dto: CreateGroupInputModel, managerFullName: string) {
 		const newGroup = new GroupEntity();
 		newGroup.id = randomUUID();
+		newGroup.creatorId = dto.creatorId;
 		newGroup.groupName = dto.groupName;
-		newGroup.managerFullName = '';
+		newGroup.managerFullName = managerFullName;
 		return newGroup;
 	}
 }

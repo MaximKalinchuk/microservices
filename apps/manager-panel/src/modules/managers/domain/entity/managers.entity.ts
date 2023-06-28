@@ -1,6 +1,5 @@
 import { Column, Entity, BeforeInsert } from 'typeorm';
 import { CreateManagerInputModel } from '../../api/models/input/create.manager.input-model';
-import { randomUUID } from 'crypto';
 import { hash } from 'bcrypt';
 import { BaseEntity } from '@class/classes/entities';
 
@@ -24,5 +23,9 @@ export class ManagersEntity extends BaseEntity {
 		newManager.passwordHash = dto.passwordHash;
 		newManager.fullName = dto.fullName;
 		return newManager;
+	}
+
+	updateFullname(fullName: string): void {
+		this.fullName = fullName;
 	}
 }

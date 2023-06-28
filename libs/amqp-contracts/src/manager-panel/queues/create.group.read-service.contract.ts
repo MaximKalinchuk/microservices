@@ -1,8 +1,8 @@
 import { QueueDeclaration } from '@amqp/amqp-contracts/shared/queue-declaration.interface';
-import { EXCHANGE_MANAGER_PANEL } from '../../exchanges/manager-panel.exchanges';
 import { AmqpBaseRequest } from '@amqp/amqp-contracts/shared/amqp-base-request.interface';
 import { AmqpBaseResponse } from '@amqp/amqp-contracts/shared/amqp-base-response.interface';
 import { CreateGroupRequest, CreateGroupResponse } from './interface';
+import { EXCHANGE_MANAGER_PANEL } from '../exchanges/manager-panel.exchanges';
 
 export namespace CreateGroupReadServiceContract {
 	export const queue: QueueDeclaration = {

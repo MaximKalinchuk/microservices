@@ -3,6 +3,10 @@ import { CreateManagerInputModel } from '../../api/models/input/create.manager.i
 import { ManagersRepository } from '../../infrastructure/managers.repository';
 import { ManagersEntity } from '../../domain/entity/managers.entity';
 import { CreateManagerEvent } from '../../domain/entity/events/create.manager.event';
+import { CreateManagerViewModel } from '../../api/models/view/create.manager.view-model';
+import { BadRequestException } from '@nestjs/common';
+import { AGGOUNTS_MANAGER_EXEPTIONS } from '@constants/constants/accounts-exception/manager.exeption';
+import { ManagersQueryRepository } from '../../infrastructure';
 
 export class CreateManagerCommand {
 	email: string;
@@ -17,11 +21,21 @@ export class CreateManagerCommand {
 
 @CommandHandler(CreateManagerCommand)
 export class CreateManagerUseCase implements ICommandHandler<CreateManagerCommand> {
-	constructor(private readonly managersRepository: ManagersRepository, private readonly eventBus: EventBus) {}
+	constructor(
+		private readonly managersRepository: ManagersRepository,
+		private readonly eventBus: EventBus,
+		private readonly managersQueryRepository: ManagersQueryRepository,
+	) {}
 
-	async execute(command: CreateManagerCommand): Promise<any> {
+	async execute(command: CreateManagerCommand): Promise<CreateManagerViewModel> {
+		const manager = await this.managersQueryRepository.findManagerByEmail(command.email);
+		if (manager) {
+			throw new BadRequestException(AGGOUNTS_MANAGER_EXEPTIONS.MANAGER_ALREADY_EXISTS_400);
+		}
+
 		const newManager = ManagersEntity.create(command);
 		await this.managersRepository.save(newManager);
+
 		const dto = {
 			id: newManager.id,
 			email: newManager.email,
@@ -29,5 +43,9 @@ export class CreateManagerUseCase implements ICommandHandler<CreateManagerComman
 			fullName: newManager.fullName,
 		};
 		await this.eventBus.publish(new CreateManagerEvent(dto));
+
+		return {
+			managerId: newManager.id,
+		};
 	}
 }

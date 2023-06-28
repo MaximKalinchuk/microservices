@@ -16,3 +16,14 @@ export class CreateManagerRequest {
 }
 
 export class CreateManagerResponse {}
+
+export class UpdateManagerFullnameRequest {
+	@IsString()
+	@IsNotEmpty()
+	readonly id: string;
+	@IsString()
+	@IsNotEmpty()
+	readonly fullName: string;
+}
+
+export class UpdateManagerFullnameResponse {}
