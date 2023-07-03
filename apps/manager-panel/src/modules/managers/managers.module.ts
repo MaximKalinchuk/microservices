@@ -7,8 +7,9 @@ import { CreateManagerUseCase } from './application/useCases/create.manager.use-
 import { CqrsModule } from '@nestjs/cqrs';
 import { ProvidersModule } from '@providers/providers/providers.module';
 import { UpdateManagerFullnameUseCase } from './application/useCases/update.manager.fullname.use-case';
+import { DeleteManagerUseCase } from './application/useCases/delete.manager.use-case';
 
-const useCase = [CreateManagerUseCase, UpdateManagerFullnameUseCase];
+const useCase = [CreateManagerUseCase, UpdateManagerFullnameUseCase, DeleteManagerUseCase];
 const adapters = [ManagersQueryRepository, ManagersRepository];
 
 @Module({

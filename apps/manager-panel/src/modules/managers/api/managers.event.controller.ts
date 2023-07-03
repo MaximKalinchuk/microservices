@@ -1,11 +1,12 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { CreateManagerInputModel } from './models/input/create.manager.input-model';
 import { CommandBus } from '@nestjs/cqrs';
 import { CreateManagerCommand } from '../application/useCases/create.manager.use-case';
 import { RabbitSubscribe } from '@golevelup/nestjs-rabbitmq';
 import { UpdateManagerFullnameManagerPanelContract } from '@amqp/amqp-contracts/accounts/queues/update.manager.fullname.contracts';
 import { UpdateManagerFullnameCommand } from '../application/useCases/update.manager.fullname.use-case';
 import { CreateManagerManagerPanelContract } from '@amqp/amqp-contracts/accounts/queues/create.manager.contracts';
+import { DeletManagerManagerPanelContract } from '@amqp/amqp-contracts/accounts/queues/delete.manager.contract';
+import { DeleteManagerCommand } from '../application/useCases/delete.manager.use-case';
 
 @Controller('users')
 export class ManagersEventController {
@@ -29,6 +30,16 @@ export class ManagersEventController {
 	})
 	async updateManagerFullname(request: UpdateManagerFullnameManagerPanelContract.request) {
 		const managerData = request.payload;
+		console.log(managerData);
 		await this.commandBus.execute(new UpdateManagerFullnameCommand(managerData));
+	}
+	@RabbitSubscribe({
+		exchange: DeletManagerManagerPanelContract.queue.exchange.name,
+		routingKey: DeletManagerManagerPanelContract.queue.routingKey,
+		queue: DeletManagerManagerPanelContract.queue.queue,
+	})
+	async deleteManager(request: DeletManagerManagerPanelContract.request) {
+		const managerData = request.payload;
+		await this.commandBus.execute(new DeleteManagerCommand(managerData.id));
 	}
 }

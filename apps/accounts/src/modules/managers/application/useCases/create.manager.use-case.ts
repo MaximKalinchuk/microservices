@@ -35,12 +35,14 @@ export class CreateManagerUseCase implements ICommandHandler<CreateManagerComman
 
 		const newManager = ManagersEntity.create(command);
 		await this.managersRepository.save(newManager);
-
 		const dto = {
 			id: newManager.id,
 			email: newManager.email,
 			passwordHash: newManager.passwordHash,
 			fullName: newManager.fullName,
+			created_At: String(newManager.created_At),
+			updated_At: String(newManager.updated_At),
+			deleted_At: String(newManager.deleted_At),
 		};
 		await this.eventBus.publish(new CreateManagerEvent(dto));
 

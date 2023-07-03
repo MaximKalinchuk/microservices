@@ -15,8 +15,8 @@ export class UpdateManagerFullnameEvent {
 @EventsHandler(UpdateManagerFullnameEvent)
 export class UpdateManagerFullnameEventUseCase implements IEventHandler<UpdateManagerFullnameEvent> {
 	constructor(private readonly amqpConnection: AmqpConnection) {}
-	handle(event: UpdateManagerFullnameEvent) {
-		this.amqpConnection.publish(
+	async handle(event: UpdateManagerFullnameEvent): Promise<void> {
+		await this.amqpConnection.publish(
 			UpdateManagerFullnameManagerPanelContract.queue.exchange.name,
 			UpdateManagerFullnameManagerPanelContract.queue.routingKey,
 			{

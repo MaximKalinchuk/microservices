@@ -8,9 +8,10 @@ import { GroupsQueryRepository, GroupsRepository } from './infrastructure';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Group, GroupSchema } from './domain/schema/groups.schema';
 import { GroupController } from './api/group.controller';
+import { DeleteGroupUseCase } from './application/useCases/delete.group.use-case';
 
 const adapters = [GroupsQueryRepository, GroupsRepository];
-const useCases = [CreateGroupUseCase];
+const useCases = [CreateGroupUseCase, DeleteGroupUseCase];
 
 @Module({
 	imports: [

@@ -11,13 +11,15 @@ export class GroupsQueryRepository {
 
 	async findGroupById(id: string): Promise<GetGroupViewModel> {
 		const group = await this.groupsQueryRepository.findOne({ id }).exec();
-		if (!group) {
+		if (!group || group.deleted_At !== 'null') {
 			throw new BadRequestException(READ_SERVICE_GROUP_EXEPTIONS.GROUP_NOT_FOUND_404);
 		}
 		return {
 			id: group.id,
 			groupName: group.groupName,
 			managerFullName: group.managerFullName,
+			created_At: new Date(group.created_At).toLocaleString(),
+			updated_At: new Date(group.updated_At).toLocaleString(),
 		};
 	}
 }

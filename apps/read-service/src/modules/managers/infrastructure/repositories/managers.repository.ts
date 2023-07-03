@@ -13,7 +13,13 @@ export class ManagersRepository {
 		newManager.save();
 	}
 
-	async updateManagerFullname(id, fullName): Promise<void> {
-		await this.managersRepository.updateOne({ id }, { $set: { fullName } });
+	async updateManagerFullname(id: string, fullName: string): Promise<void> {
+		const updated_At = new Date();
+		await this.managersRepository.updateOne({ id }, { $set: { fullName, updated_At } }).exec();
+	}
+
+	async softDeleteManager(id: string): Promise<void> {
+		const deleted_At = new Date();
+		await this.managersRepository.updateOne({ id }, { $set: { deleted_At } }).exec();
 	}
 }

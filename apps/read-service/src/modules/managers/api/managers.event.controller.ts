@@ -5,6 +5,8 @@ import { RabbitSubscribe } from '@golevelup/nestjs-rabbitmq';
 import { UpdateManagerFullnameReadServiceContract } from '@amqp/amqp-contracts/accounts/queues/update.manager.fullname.contracts';
 import { UpdateManagerFullnameCommand } from '../application/useCases/update.manager.fullname.use-case';
 import { CreateManagerReadServiceContract } from '@amqp/amqp-contracts/accounts/queues/create.manager.contracts';
+import { DeletManagerReadServiceContract } from '@amqp/amqp-contracts/accounts/queues/delete.manager.contract';
+import { DeleteManagerCommand } from '../application/useCases/delete.manager.use-case';
 
 @Controller('users')
 export class ManagersEventController {
@@ -30,5 +32,15 @@ export class ManagersEventController {
 		const managerData = request.payload;
 		console.log(managerData);
 		await this.commandBus.execute(new UpdateManagerFullnameCommand(managerData));
+	}
+
+	@RabbitSubscribe({
+		exchange: DeletManagerReadServiceContract.queue.exchange.name,
+		routingKey: DeletManagerReadServiceContract.queue.routingKey,
+		queue: DeletManagerReadServiceContract.queue.queue,
+	})
+	async deleteManager(request: DeletManagerReadServiceContract.request) {
+		const managerData = request.payload;
+		await this.commandBus.execute(new DeleteManagerCommand(managerData.id));
 	}
 }

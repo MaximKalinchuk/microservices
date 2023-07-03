@@ -13,6 +13,14 @@ export class CreateManagerRequest {
 	@IsString()
 	@IsNotEmpty()
 	readonly fullName: string;
+	@IsString()
+	@IsNotEmpty()
+	readonly created_At: string;
+	@IsString()
+	@IsNotEmpty()
+	readonly updated_At: string;
+	@IsNotEmpty()
+	readonly deleted_At: string | null;
 }
 
 export class CreateManagerResponse {}
@@ -27,3 +35,11 @@ export class UpdateManagerFullnameRequest {
 }
 
 export class UpdateManagerFullnameResponse {}
+
+export class DeletManagerRequest {
+	@IsString()
+	@IsNotEmpty()
+	id: string;
+}
+
+export class DeletManagerResponse {}

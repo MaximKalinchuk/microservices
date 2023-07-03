@@ -9,15 +9,38 @@ import { READ_SERVICE_MANAGER_EXEPTIONS } from '@constants/constants/read-servic
 export class ManagersQueryRepository {
 	constructor(@InjectModel(Manager.name) private readonly managerQueryRepository: Model<Manager>) {}
 
-	async findManager(id: string): Promise<GetManagerViewModel> {
+	async findManagerById(id: string): Promise<GetManagerViewModel> {
 		const manager = await this.managerQueryRepository.findOne({ id }).exec();
-		if (!manager) {
+		if (!manager || manager.deleted_At !== 'null') {
 			throw new BadRequestException(READ_SERVICE_MANAGER_EXEPTIONS.MANAGER_NOT_FOUND_404);
 		}
 		return {
 			id: manager.id,
 			email: manager.email,
 			fullName: manager.fullName,
+			created_At: new Date(manager.created_At).toLocaleString(),
+			updated_At: new Date(manager.updated_At).toLocaleString(),
 		};
+	}
+
+	async findAllManagers(): Promise<GetManagerViewModel[]> {
+		const managers = await this.managerQueryRepository.find();
+		return this.buildAllManagers(managers);
+	}
+
+	buildAllManagers(managers: Manager[]) {
+		const actualManagers = managers
+			.filter((manager) => manager.deleted_At === 'null')
+			.map((manager) => {
+				return {
+					id: manager.id,
+					email: manager.email,
+					fullName: manager.fullName,
+					created_At: new Date(manager.created_At).toLocaleString(),
+					updated_At: new Date(manager.updated_At).toLocaleString(),
+				};
+			});
+
+		return actualManagers;
 	}
 }

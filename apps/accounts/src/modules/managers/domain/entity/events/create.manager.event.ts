@@ -9,23 +9,37 @@ export class CreateManagerEvent {
 	email: string;
 	passwordHash: string;
 	fullName: string;
+	created_At: string;
+	updated_At: string;
+	deleted_At: string | null;
 	constructor(dto: CreateManagerEventInputModel) {
 		this.id = dto.id;
 		this.email = dto.email;
 		this.passwordHash = dto.passwordHash;
 		this.fullName = dto.fullName;
+		this.created_At = dto.created_At;
+		this.updated_At = dto.updated_At;
+		this.deleted_At = dto.deleted_At;
 	}
 }
 
 @EventsHandler(CreateManagerEvent)
 export class CreateManagerEventUseCase implements IEventHandler<CreateManagerEvent> {
 	constructor(private readonly amqpConnection: AmqpConnection) {}
-	handle(event: CreateManagerEvent) {
-		this.amqpConnection.publish(
+	async handle(event: CreateManagerEvent) {
+		await this.amqpConnection.publish(
 			CreateManagerManagerPanelContract.queue.exchange.name,
 			CreateManagerManagerPanelContract.queue.routingKey,
 			{
-				payload: { id: event.id, email: event.email, passwordHash: event.passwordHash, fullName: event.fullName },
+				payload: {
+					id: event.id,
+					email: event.email,
+					passwordHash: event.passwordHash,
+					fullName: event.fullName,
+					created_At: event.created_At,
+					updated_At: event.updated_At,
+					deleted_At: event.deleted_At,
+				},
 			},
 		);
 	}

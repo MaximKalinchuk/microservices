@@ -7,11 +7,17 @@ export class CreateManagerCommand {
 	email: string;
 	passwordHash: string;
 	fullName: string;
+	created_At: string;
+	updated_At: string;
+	deleted_At: string | null;
 	constructor(dto: CreateManagerInputModel) {
 		this.id = dto.id;
 		this.email = dto.email;
 		this.passwordHash = dto.passwordHash;
 		this.fullName = dto.fullName;
+		this.created_At = dto.created_At;
+		this.updated_At = dto.updated_At;
+		this.deleted_At = dto.deleted_At;
 	}
 }
 

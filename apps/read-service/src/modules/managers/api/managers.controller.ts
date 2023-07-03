@@ -7,8 +7,14 @@ export class ManagersController {
 	constructor(private readonly managersQueryRepository: ManagersQueryRepository) {}
 
 	@HttpCode(200)
+	@Get()
+	async getAllManagers(): Promise<GetManagerViewModel[]> {
+		return await this.managersQueryRepository.findAllManagers();
+	}
+
+	@HttpCode(200)
 	@Get(':id')
 	async getManagerById(@Param('id') id: string): Promise<GetManagerViewModel> {
-		return await this.managersQueryRepository.findManager(id);
+		return await this.managersQueryRepository.findManagerById(id);
 	}
 }

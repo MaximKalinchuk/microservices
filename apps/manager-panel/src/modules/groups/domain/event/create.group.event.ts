@@ -8,11 +8,17 @@ export class CreateGroupEvent {
 	groupName: string;
 	managerFullName: string;
 	creatorId: string;
+	created_At: string;
+	updated_At: string;
+	deleted_At: string;
 	constructor(dto: CreateGroupEventInputModel) {
 		this.id = dto.id;
 		this.groupName = dto.groupName;
 		this.managerFullName = dto.managerFullName;
 		this.creatorId = dto.creatorId;
+		this.created_At = dto.created_At;
+		this.updated_At = dto.updated_At;
+		this.deleted_At = dto.deleted_At;
 	}
 }
 
@@ -29,6 +35,9 @@ export class CreateGroupEventUseCase implements IEventHandler<CreateGroupEvent> 
 					groupName: event.groupName,
 					managerFullName: event.managerFullName,
 					creatorId: event.creatorId,
+					created_At: event.created_At,
+					updated_At: event.updated_At,
+					deleted_At: event.deleted_At,
 				},
 			},
 		);

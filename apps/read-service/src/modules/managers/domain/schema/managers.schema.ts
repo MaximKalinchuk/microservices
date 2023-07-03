@@ -12,12 +12,12 @@ export class Manager extends Document implements BaseSchema {
 	passwordHash: string;
 	@Prop({ required: true })
 	fullName: string;
-	// @Prop({ required: true })
-	// created_At: Date;
-	// @Prop({ required: true })
-	// updated_At: Date;
-	// @Prop({ required: true })
-	// deleted_At: Date;
+	@Prop({ required: true })
+	created_At: string;
+	@Prop({ required: true })
+	updated_At: string;
+	@Prop({ required: true })
+	deleted_At: string | null;
 }
 
 export const ManagerSchema = SchemaFactory.createForClass(Manager);
