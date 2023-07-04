@@ -1,4 +1,4 @@
-import { DeletManagerManagerPanelContract } from '@amqp/amqp-contracts/accounts/queues/delete.manager.contract';
+import { DeletManagerContract } from '@amqp/amqp-contracts/accounts/queues/delete.manager.contract';
 import { AmqpConnection } from '@golevelup/nestjs-rabbitmq';
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
@@ -15,8 +15,8 @@ export class DeleteManagerEventUseCase implements IEventHandler<DeleteManagerEve
 
 	async handle(event: DeleteManagerEvent): Promise<void> {
 		await this.amqpConnection.publish(
-			DeletManagerManagerPanelContract.queue.exchange.name,
-			DeletManagerManagerPanelContract.queue.routingKey,
+			DeletManagerContract.queueReadService.exchange.name,
+			DeletManagerContract.queueReadService.routingKey,
 			{
 				payload: {
 					id: event.id,

@@ -1,7 +1,7 @@
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 import { UpdateManagerFullnameInputModel } from './models/input/update.manager.event.input-model';
 import { AmqpConnection } from '@golevelup/nestjs-rabbitmq';
-import { UpdateManagerFullnameManagerPanelContract } from '@amqp/amqp-contracts/accounts/queues/update.manager.fullname.contracts';
+import { UpdateManagerFullnameContract } from '@amqp/amqp-contracts/accounts/queues/update.manager.fullname.contracts';
 
 export class UpdateManagerFullnameEvent {
 	id: string;
@@ -17,8 +17,8 @@ export class UpdateManagerFullnameEventUseCase implements IEventHandler<UpdateMa
 	constructor(private readonly amqpConnection: AmqpConnection) {}
 	async handle(event: UpdateManagerFullnameEvent): Promise<void> {
 		await this.amqpConnection.publish(
-			UpdateManagerFullnameManagerPanelContract.queue.exchange.name,
-			UpdateManagerFullnameManagerPanelContract.queue.routingKey,
+			UpdateManagerFullnameContract.queueReadService.exchange.name,
+			UpdateManagerFullnameContract.queueReadService.routingKey,
 			{
 				payload: { id: event.id, fullName: event.fullName },
 			},

@@ -4,8 +4,8 @@ import { AmqpBaseRequest } from '@amqp/amqp-contracts/shared/amqp-base-request.i
 import { AmqpBaseResponse } from '@amqp/amqp-contracts/shared/amqp-base-response.interface';
 import { DeletManagerRequest, DeletManagerResponse } from './interface';
 
-export namespace DeletManagerManagerPanelContract {
-	export const queue: QueueDeclaration = {
+export namespace DeletManagerContract {
+	export const queueManagerPanel: QueueDeclaration = {
 		exchange: EXCHANGE_ACCOUNT,
 		routingKey: `${EXCHANGE_ACCOUNT.name}-delete.manager`,
 		queue: `${EXCHANGE_ACCOUNT.name}-delete.manager.manager-panel`,
@@ -14,13 +14,7 @@ export namespace DeletManagerManagerPanelContract {
 		},
 	};
 
-	export type request = AmqpBaseRequest<DeletManagerRequest>;
-
-	export type response = AmqpBaseResponse<DeletManagerResponse>;
-}
-
-export namespace DeletManagerReadServiceContract {
-	export const queue: QueueDeclaration = {
+	export const queueReadService: QueueDeclaration = {
 		exchange: EXCHANGE_ACCOUNT,
 		routingKey: `${EXCHANGE_ACCOUNT.name}-delete.manager`,
 		queue: `${EXCHANGE_ACCOUNT.name}-delete.manager.read-service`,

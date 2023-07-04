@@ -4,8 +4,8 @@ import { AmqpBaseRequest } from '@amqp/amqp-contracts/shared/amqp-base-request.i
 import { AmqpBaseResponse } from '@amqp/amqp-contracts/shared/amqp-base-response.interface';
 import { UpdateManagerFullnameRequest, UpdateManagerFullnameResponse } from './interface';
 
-export namespace UpdateManagerFullnameManagerPanelContract {
-	export const queue: QueueDeclaration = {
+export namespace UpdateManagerFullnameContract {
+	export const queueManagerPanel: QueueDeclaration = {
 		exchange: EXCHANGE_ACCOUNT,
 		routingKey: `${EXCHANGE_ACCOUNT.name}-update.manager.fullname`,
 		queue: `${EXCHANGE_ACCOUNT.name}-update.manager.fullname.manager-panel`,
@@ -14,13 +14,7 @@ export namespace UpdateManagerFullnameManagerPanelContract {
 		},
 	};
 
-	export type request = AmqpBaseRequest<UpdateManagerFullnameRequest>;
-
-	export type response = AmqpBaseResponse<UpdateManagerFullnameResponse>;
-}
-
-export namespace UpdateManagerFullnameReadServiceContract {
-	export const queue: QueueDeclaration = {
+	export const queueReadService: QueueDeclaration = {
 		exchange: EXCHANGE_ACCOUNT,
 		routingKey: `${EXCHANGE_ACCOUNT.name}-update.manager.fullname`,
 		queue: `${EXCHANGE_ACCOUNT.name}-update.manager.fullname.read-service`,

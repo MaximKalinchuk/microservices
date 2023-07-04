@@ -4,8 +4,8 @@ import { AmqpBaseResponse } from '@amqp/amqp-contracts/shared/amqp-base-response
 import { CreateManagerRequest, CreateManagerResponse } from './interface';
 import { EXCHANGE_ACCOUNT } from '../exchanges/accounts.exchanges';
 
-export namespace CreateManagerManagerPanelContract {
-	export const queue: QueueDeclaration = {
+export namespace CreateManagerContract {
+	export const queueManagerPanel: QueueDeclaration = {
 		exchange: EXCHANGE_ACCOUNT,
 		routingKey: `${EXCHANGE_ACCOUNT.name}-create.manager`,
 		queue: `${EXCHANGE_ACCOUNT.name}-create.manager.manager-panel`,
@@ -14,13 +14,7 @@ export namespace CreateManagerManagerPanelContract {
 		},
 	};
 
-	export type request = AmqpBaseRequest<CreateManagerRequest>;
-
-	export type response = AmqpBaseResponse<CreateManagerResponse>;
-}
-
-export namespace CreateManagerReadServiceContract {
-	export const queue: QueueDeclaration = {
+	export const queueReadService: QueueDeclaration = {
 		exchange: EXCHANGE_ACCOUNT,
 		routingKey: `${EXCHANGE_ACCOUNT.name}-create.manager`,
 		queue: `${EXCHANGE_ACCOUNT.name}-create.manager.read-service`,

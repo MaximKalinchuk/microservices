@@ -2,7 +2,7 @@ import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 import { CreateManagerInputModel } from '../../../api/models/input/create.manager.input-model';
 import { AmqpConnection } from '@golevelup/nestjs-rabbitmq';
 import { CreateManagerEventInputModel } from './models/input/create.manager.event.input-model';
-import { CreateManagerManagerPanelContract } from '@amqp/amqp-contracts/accounts/queues/create.manager.contracts';
+import { CreateManagerContract } from '@amqp/amqp-contracts/accounts/queues/create.manager.contracts';
 
 export class CreateManagerEvent {
 	id: string;
@@ -28,8 +28,8 @@ export class CreateManagerEventUseCase implements IEventHandler<CreateManagerEve
 	constructor(private readonly amqpConnection: AmqpConnection) {}
 	async handle(event: CreateManagerEvent) {
 		await this.amqpConnection.publish(
-			CreateManagerManagerPanelContract.queue.exchange.name,
-			CreateManagerManagerPanelContract.queue.routingKey,
+			CreateManagerContract.queueReadService.exchange.name,
+			CreateManagerContract.queueReadService.routingKey,
 			{
 				payload: {
 					id: event.id,
