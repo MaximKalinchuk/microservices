@@ -1,6 +1,6 @@
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModuleAsyncOptions } from '@nestjs/typeorm';
-import { ManagersEntity } from '../modules/managers/domain/entity/managers.entity';
+import { ManagersEntity } from '../../modules/managers/domain/entity/managers.entity';
 
 export const TypeOrmConfigService = (): TypeOrmModuleAsyncOptions => ({
 	useFactory: (configService: ConfigService) => ({
