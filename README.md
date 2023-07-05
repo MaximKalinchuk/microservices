@@ -31,6 +31,24 @@ yarn start manager-panel
 yarn start read-sevice
 ```
 
+## Миграции:
+
+В Accounts и Manager-Panel микросервисах используются миграции. Нужно удалить старую миграцию по адресу ./config/database/migrations и накатить новую для каждого.
+
+```bash
+# Accounts:
+# 1. (создать новую миграцию):
+yarn accounts:db:create
+# 2. (накатить новую миграцию):
+yarn accounts:db:create
+
+# Manager-Panel:
+# 1. (создать новую миграцию):
+yarn manager-panel:db:create
+# 2. (накатить новую миграцию):
+yarn manager-panel:db:create
+```
+
 <b>Внимание!</b> Необходимо настроить env файлы и иметь локально mongoDB, PostgreSQL и RabbitMQ
 
 ## Пример работы:

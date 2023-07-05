@@ -10,9 +10,8 @@ export const TypeOrmConfigService = (): TypeOrmModuleAsyncOptions => ({
 		username: configService.get('PG_USERNAME'),
 		password: configService.get('PG_PASSWORD'),
 		database: configService.get('PG_DATABASE'),
-		//entities: [__dirname + '/../**/*.entity{.ts,.js}'],
 		entities: [ManagersEntity],
-		synchronize: true, //Пока разрабатываем, оставляем в true
+		synchronize: false,
 	}),
 	inject: [ConfigService],
 	imports: [ConfigModule],

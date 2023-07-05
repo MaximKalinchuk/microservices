@@ -18,11 +18,16 @@
 		"test:cov": "jest --coverage",
 		"test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
 		"test:e2e": "jest --config ./apps/microservices/test/jest-e2e.json",
-		"typeorm-accounts": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli -d apps/accounts/src/config/database/data-source-migrations.ts",
-		"db:start": "yarn db:drop && yarn db:migrate",
-		"db:create": "yarn db:drop && cross-env NODE_ENV=accounts yarn typeorm-accounts migration:generate apps/accounts/src/config/database/migrations/createDataBase",
-		"db:migrate": "cross-env NODE_ENV=accounts yarn typeorm-accounts migration:run",
-		"db:drop": "cross-env NODE_ENV=accounts yarn typeorm-accounts schema:drop "
+		"accounts:typeorm-accounts": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli -d apps/accounts/src/config/database/data-source-migrations.ts",
+		"accounts:db:start": "yarn accounts:db:drop && yarn accounts:db:migrate",
+		"accounts:db:create": "yarn accounts:db:drop && cross-env NODE_ENV=accounts yarn accounts:typeorm-accounts migration:generate apps/accounts/src/config/database/migrations/createDataBase",
+		"accounts:db:migrate": "cross-env NODE_ENV=accounts yarn accounts:typeorm-accounts migration:run",
+		"accounts:db:drop": "cross-env NODE_ENV=accounts yarn accounts:typeorm-accounts schema:drop",
+		"manager-panel:typeorm-manager-panel": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli -d apps/manager-panel/src/config/database/data-source-migrations.ts",
+		"manager-panel:db:start": "yarn manager-panel:db:drop && yarn manager-panel:db:migrate",
+		"manager-panel:db:create": "yarn manager-panel:db:drop && cross-env NODE_ENV=manager.panel yarn manager-panel:typeorm-manager-panel migration:generate apps/manager-panel/src/config/database/migrations/createDataBase",
+		"manager-panel:db:migrate": "cross-env NODE_ENV=manager.panel yarn manager-panel:typeorm-manager-panel migration:run",
+		"manager-panel:db:drop": "cross-env NODE_ENV=manager.panel yarn manager-panel:typeorm-manager-panel schema:drop"
 	},
 	"dependencies": {
 		"@golevelup/nestjs-rabbitmq": "^3.6.1",
